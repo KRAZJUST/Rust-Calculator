@@ -1,6 +1,6 @@
 use eframe::egui::{self, CentralPanel, Ui};
 use eframe::{App, Frame};
-use crate::styles::{result_button, styled_button};
+use crate::styles::{draw_equation_background, result_button, styled_button};
 
 #[derive(Default)]
 pub struct CalculatorApp {
@@ -16,7 +16,7 @@ impl App for CalculatorApp {
         CentralPanel::default().show(ctx, |ui| {
             ui.heading("Rust Calculator");
 
-            ui.label(&self.display);
+            draw_equation_background(ui, &self.display);
 
             // Display buttons
             self.ui_buttons(ui);
