@@ -11,6 +11,70 @@ pub struct CalculatorApp {
 
 impl App for CalculatorApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut Frame) {
+        
+        // Handle keyboard input
+        if ctx.input(|i| i.key_pressed(egui::Key::Num0)){
+            self.handle_button_press("0");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Num1)){
+            self.handle_button_press("1");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Num2)){
+            self.handle_button_press("2");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Num3)){
+            self.handle_button_press("3");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Num4)){
+            self.handle_button_press("4");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Num5)){
+            self.handle_button_press("5");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Num6)){
+            self.handle_button_press("6");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Num7)){
+            self.handle_button_press("7");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Num8)){
+            self.handle_button_press("8");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Num9)){
+            self.handle_button_press("9");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Minus)){
+            self.handle_button_press("-");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Plus)){
+            self.handle_button_press("+");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Slash)){
+            self.handle_button_press("/");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::X)){
+            self.handle_button_press("*");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Enter)){
+            self.calculate();
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Escape)){
+            self.clear();
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::C)){
+            self.clear();
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Equals)){
+            self.calculate();
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Period)){
+            self.handle_button_press(".");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::Backspace)){
+            self.handle_remove();
+        }
+         
+
         CentralPanel::default().show(ctx, |ui| {
             ui.heading("Rust Calculator");
 

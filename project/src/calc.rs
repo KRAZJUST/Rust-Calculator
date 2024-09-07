@@ -21,6 +21,11 @@ impl CalculatorApp {
         }
     }
 
+    pub fn handle_remove(&mut self) {
+        self.calculate.pop();
+        self.display.pop();
+    }
+
     // Calculate the result when '=' is pressed
     pub fn calculate(&mut self) {
         // Try to evaluate the entire expression stored in `calculate`

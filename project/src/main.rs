@@ -2,14 +2,14 @@ mod app;
 mod calc;
 mod styles;
 
-use eframe::egui;
+use eframe::egui::{self, ViewportBuilder};
 use app::CalculatorApp;
 
 fn main() {
     let app = CalculatorApp::default();
     let options = eframe::NativeOptions {
-        initial_window_size: Some(egui::vec2(300.0, 450.0)), // Set initial window size here
+        viewport: ViewportBuilder::default().with_inner_size([300.0, 400.0]),
         ..Default::default()
     };
-    eframe::run_native("Calculator", options, Box::new(|_cc| Box::new(app)));
+    let _ = eframe::run_native("Calculator", options, Box::new(|_cc| Ok(Box::new(app))));
 }
