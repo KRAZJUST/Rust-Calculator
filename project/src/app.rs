@@ -5,9 +5,6 @@ use crate::styles::{draw_equation_background, result_button, styled_button};
 #[derive(Default)]
 pub struct CalculatorApp {
     pub display: String,
-    pub input1: f64,
-    pub input2: f64,
-    pub operator: Option<char>,
     pub result: Option<f64>,
 }
 
@@ -30,11 +27,7 @@ impl CalculatorApp {
      */
     fn ui_buttons(&mut self, ui: &mut Ui) {
         if ui.add(styled_button("Clear")).clicked() {
-            self.display.clear();
-            self.input1 = 0.0;
-            self.input2 = 0.0;
-            self.operator = None;
-            self.result = None;
+            self.clear();
         }
 
         ui.horizontal(|ui| {
@@ -48,7 +41,7 @@ impl CalculatorApp {
                 self.handle_button_press("9");
             }
             if ui.add(styled_button("÷")).clicked() {
-                self.handle_operator('/');
+                self.handle_button_press("/");
             }
         });
 
@@ -63,7 +56,7 @@ impl CalculatorApp {
                 self.handle_button_press("6");
             }
             if ui.add(styled_button("×")).clicked() {
-                self.handle_operator('*');
+                self.handle_button_press("*");
             }
         });
 
@@ -78,7 +71,7 @@ impl CalculatorApp {
                 self.handle_button_press("3");
             }
             if ui.add(styled_button("-")).clicked() {
-                self.handle_operator('-');
+                self.handle_button_press("-");
             }
         });
 
@@ -93,7 +86,7 @@ impl CalculatorApp {
 
             }
             if ui.add(styled_button("+")).clicked() {
-                self.handle_operator('+');
+                self.handle_button_press("+");
             }
             if ui.add(result_button("=")).clicked() {
                 self.calculate();
