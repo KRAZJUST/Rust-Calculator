@@ -27,4 +27,19 @@ impl CalculatorApp {
         self.display.clear(); 
         self.result = None;
     }
+
+    // TODO: fix this function 
+    // Convert the result to a percentage 
+    pub fn convert_to_perct(&mut self) {
+        if let Some(result) = self.result {
+            // Convert to percentage by multiplying by 100
+            let percentage = result * 100.0;
+
+            // Update the display with the percentage value and a '%' symbol
+            self.display = format!("{:.2}%", percentage);
+            
+            // Update the result field to hold the percentage value for further operations
+            self.result = Some(percentage);
+        }
+    }
 }

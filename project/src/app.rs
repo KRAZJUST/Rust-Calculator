@@ -80,10 +80,10 @@ impl CalculatorApp {
                 self.handle_button_press("0");
             }
             if ui.add(styled_button(".")).clicked() {
-                
+                self.handle_button_press(".");
             }
             if ui.add(styled_button("%")).clicked() {
-
+                self.convert_to_perct();
             }
             if ui.add(styled_button("+")).clicked() {
                 self.handle_button_press("+");
