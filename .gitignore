@@ -1,0 +1,21 @@
+# Binaries and build artifacts
+project/target
+project/**/*.rs.bk
+
+# If you are building a library, ignore Cargo.lock
+project/Cargo.lock
+
+# IDEs and editors
+.vscode/
+.idea/
+project/*.swp
+project/.DS_Store
+project/Thumbs.db
+
+# Backup and temporary files
+project/*.bak
+project/*.tmp
+project/*.old
+
+# Documentation artifacts
+/target/doc/
