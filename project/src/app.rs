@@ -6,6 +6,7 @@ use crate::styles::{draw_equation_background, result_button, styled_button};
 pub struct CalculatorApp {
     pub display: String,
     pub result: Option<f64>,
+    pub calculate: String,
 }
 
 impl App for CalculatorApp {
