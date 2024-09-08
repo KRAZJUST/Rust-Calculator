@@ -126,6 +126,9 @@ impl CalculatorApp {
             if ui.add(styled_button("÷")).clicked() {
                 self.handle_button_press("/");
             }
+            if ui.add(styled_button("√")).clicked() {
+                self.handle_button_press("sqrt(")
+            }
         });
 
         ui.horizontal(|ui| {
@@ -141,8 +144,8 @@ impl CalculatorApp {
             if ui.add(styled_button("×")).clicked() {
                 self.handle_button_press("*");
             }
-            if ui.add(styled_button("√")).clicked() {
-                self.handle_button_press("sqrt(")
+            if ui.add(styled_button("x²")).clicked() {
+                self.handle_button_press("^2");
             }
         });
 
@@ -159,9 +162,6 @@ impl CalculatorApp {
             if ui.add(styled_button("-")).clicked() {
                 self.handle_button_press("-");
             }
-            if ui.add(styled_button("x²")).clicked() {
-                self.handle_button_press("^2");
-            }
         });
 
         ui.horizontal(|ui| {
@@ -177,6 +177,15 @@ impl CalculatorApp {
             if ui.add(styled_button("+")).clicked() {
                 self.handle_button_press("+");
             }
+        });
+
+        // Add space to move the result button up
+        ui.add_space(-105.0);
+
+        // Create the result button spanning two rows
+        ui.horizontal(|ui| {
+            ui.add_space(232.0);
+
             if ui.add(result_button("=")).clicked() {
                 self.calculate();
             }
