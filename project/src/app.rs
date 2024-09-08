@@ -7,6 +7,7 @@ pub struct CalculatorApp {
     pub display: String,
     pub result: Option<f64>,
     pub calculate: String,
+    pub previous_equation: String,
 }
 
 impl App for CalculatorApp {
@@ -82,10 +83,8 @@ impl App for CalculatorApp {
          
 
         CentralPanel::default().show(ctx, |ui| {
-            ui.heading("Rust Calculator");
-
-            draw_equation_background(ui, &self.display);
-
+            // Draw background for the result and equation history
+            draw_equation_background(ui, &self.display, &self.previous_equation);
             // Display buttons
             self.ui_buttons(ui);
         });

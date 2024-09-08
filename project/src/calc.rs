@@ -77,6 +77,7 @@ impl CalculatorApp {
         // Try to evaluate the entire expression stored in `calculate`
         match eval_str(&self.calculate) {
             Ok(result) => {
+                self.previous_equation = self.display.clone();
                 let result_str = result.to_string();
                 let digits_before_decimal = result_str.split('.').next().unwrap_or("").len();
 
