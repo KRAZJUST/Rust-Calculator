@@ -41,15 +41,23 @@ pub fn draw_equation_background(ui: &mut egui::Ui, display: &str, previous_equat
 
     ui.painter().rect_filled(rect1, egui::Rounding::same(10.0), background_color);
 
+    let mut result_size = 20.0;
+    if display.len() >= 20 && display.len() < 30 {
+        result_size = 16.0;
+    }
+    else if display.len() >= 30 && display.len() < 39 {
+        result_size = 10.0;
+    }
+
     let equation_text = egui::RichText::new(previous_equation)
-        .size(20.0)
+        .size(result_size)
         .color(egui::Color32::GRAY);
 
     ui.painter().text(
         rect1.left_center(),
         egui::Align2::LEFT_CENTER,
         equation_text.text(),
-        egui::FontId::proportional(20.0),
+        egui::FontId::proportional(result_size),
         egui::Color32::GRAY,
     );
 
@@ -59,15 +67,31 @@ pub fn draw_equation_background(ui: &mut egui::Ui, display: &str, previous_equat
 
     ui.painter().rect_filled(rect2, egui::Rounding::same(10.0), background_color2);
 
+    let mut font_size = 32.0;
+
+    if display.len() < 14 {
+        font_size = 32.0;
+    }
+    else if display.len() >= 14 && display.len() < 22 {
+        font_size = 22.0;
+    }
+    else if display.len() >= 22 && display.len() < 39 {
+        font_size = 12.0;
+    }
+    else {
+        font_size = 12.0;
+    }
+    
+
     let display_text = egui::RichText::new(display)
-        .size(32.0)
+        .size(font_size)
         .color(egui::Color32::WHITE);
 
     ui.painter().text(
         rect2.left_center(),
         egui::Align2::LEFT_CENTER,
         display_text.text(),
-        egui::FontId::proportional(32.0),
+        egui::FontId::proportional(font_size),
         egui::Color32::WHITE,
     );
 }

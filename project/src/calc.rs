@@ -6,7 +6,7 @@ impl CalculatorApp {
     * Function to add operators and operands into the equation
     */
     pub fn handle_button_press(&mut self, label: &str) {
-        if self.calculate.len() >= 13 && (label != "*" || label != "+" || label != "-" || label != "/"){
+        if self.display.len() > 39 {
             return;
         }
             
@@ -78,25 +78,33 @@ impl CalculatorApp {
         match eval_str(&self.calculate) {
             Ok(result) => {
                 self.previous_equation = self.display.clone();
-                let result_str = result.to_string();
-                let digits_before_decimal = result_str.split('.').next().unwrap_or("").len();
 
-                // If the total digits exceed 13, switch to scientific notation
-                if digits_before_decimal > 13 {
-                    // Display in scientific notation if too large
-                    self.display = format!("{:.6e}", result); // 6 decimal places in scientific notation
-                } else {
-                    // Calculate max decimal places to limit to 13 total digits
-                    let max_decimal_places = if digits_before_decimal >= 13 {
-                        0 // No decimal places if the integer part is too long
-                    } else {
-                        13 - digits_before_decimal
-                    };
-
-                    // Display the result normally with limited decimal places
-                    self.display = format!("{:.1$}", result, max_decimal_places);
+                // Check if the result is a int and format it accordnigly
+                if result.fract() == 0.0 {
+                    // Display as an integer
+                    self.display = format!("{:.0}", result);
                 }
+                // Display as decimal
+                else { 
+                    let result_str = result.to_string();
+                    let digits_before_decimal = result_str.split('.').next().unwrap_or("").len();
 
+                    // If the total digits exceed 13, switch to scientific notation
+                    if digits_before_decimal > 13 {
+                        // Display in scientific notation if too large
+                        self.display = format!("{:.6e}", result); // 6 decimal places in scientific notation
+                    } else {
+                        // Calculate max decimal places to limit to 13 total digits
+                        let max_decimal_places = if digits_before_decimal >= 13 {
+                            0 // No decimal places if the integer part is too long
+                        } else {
+                            13 - digits_before_decimal
+                        };
+
+                        // Display the result normally with limited decimal places
+                        self.display = format!("{:.1$}", result, max_decimal_places);
+                    }
+                }
                 // Store the result in the calculate field for further operations
                 self.calculate = self.display.clone();
             }
