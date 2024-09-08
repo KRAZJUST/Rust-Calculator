@@ -36,12 +36,38 @@ impl CalculatorApp {
         }
     }
 
+    pub fn check_last_two(&mut self) -> bool {
+        // Get the total number of characters
+        let len = self.calculate.chars().count();
+        
+        // Ensure the string has at least two characters
+        if len < 2 {
+            return false;
+        }
+    
+        // Get the second-to-last and last characters
+        let mut chars = self.calculate.chars().rev();
+    
+        let last = chars.next().unwrap();
+        let pre_last = chars.next().unwrap();
+    
+        // Check if the second-to-last is '^' and the last is '2'
+        pre_last == '^' && last == '2'
+    }
+
     /*
     * Function to remove last digit from equation
     */
     pub fn handle_remove(&mut self) {
-        self.calculate.pop();
-        self.display.pop();
+        if self.check_last_two(){
+            self.calculate.pop();
+            self.calculate.pop();
+            self.display.pop();
+        } 
+        else {
+            self.calculate.pop();
+            self.display.pop();
+        }
     }
 
     /*
