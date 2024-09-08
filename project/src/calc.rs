@@ -2,11 +2,14 @@ use crate::app::CalculatorApp;
 use meval::eval_str;
 
 impl CalculatorApp {
-    // Handle button presses (numbers and operators)
+    /*
+    * Function to add operators and operands into the equation
+    */
     pub fn handle_button_press(&mut self, label: &str) {
         if self.calculate.len() >= 13 && (label != "*" || label != "+" || label != "-" || label != "/"){
             return;
         }
+            
         // Push label into calculate to keep equation to solve
         self.calculate.push_str(label);
 
@@ -18,12 +21,24 @@ impl CalculatorApp {
             "/" => {
                 self.display.push_str("÷");
             }
+            "pi" => {
+                self.display.push_str("π");
+            }
+            "^2" => {
+                self.display.push_str("²");
+            }
+            "%" => {
+                self.display.push_str("mod");
+            }
             _ => {
                 self.display.push_str(label);
             }
         }
     }
 
+    /*
+    * Function to remove last digit from equation
+    */
     pub fn handle_remove(&mut self) {
         self.calculate.pop();
         self.display.pop();
@@ -60,31 +75,19 @@ impl CalculatorApp {
             }
             Err(_) => {
                 // Display an error message if the evaluation fails
-                self.display = "Error".to_string();
+                self.display = "Malformed exp.".to_string();
                 self.calculate = "Error".to_string();
             }
         }
     }
 
-    // Clear the display and reset state
+    /*
+    * Function to clear the result and reset the state of calculator
+    */
     pub fn clear(&mut self) {
         self.display.clear(); 
         self.calculate.clear();
         self.result = None;
     }
 
-    // TODO: fix this function 
-    // Convert the result to a percentage 
-    pub fn convert_to_perct(&mut self) {
-        if let Some(result) = self.result {
-            // Convert to percentage by multiplying by 100
-            let percentage = result * 100.0;
-            
-            // Update the display with the percentage value and a '%' symbol
-            self.display = format!("{:.2}%", percentage.to_string());
-            
-            // Update the result field to hold the percentage value for further operations
-            self.result = Some(percentage);
-        }
-    }
 }

@@ -73,6 +73,12 @@ impl App for CalculatorApp {
         else if ctx.input(|i| i.key_pressed(egui::Key::Backspace)){
             self.handle_remove();
         }
+        else if ctx.input(|i| i.key_pressed(egui::Key::OpenBracket)){
+            self.handle_button_press("(");
+        }
+        else if ctx.input(|i| i.key_pressed(egui::Key::CloseBracket)){
+            self.handle_button_press(")");
+        }
          
 
         CentralPanel::default().show(ctx, |ui| {
@@ -91,9 +97,21 @@ impl CalculatorApp {
      * Function to add buttons into the Ui and handle them being pressed
      */
     fn ui_buttons(&mut self, ui: &mut Ui) {
-        if ui.add(styled_button("Clear")).clicked() {
-            self.clear();
-        }
+        
+        ui.horizontal(|ui| {
+            if ui.add(styled_button("Clear")).clicked() {
+                self.clear();
+            }
+            if ui.add(styled_button("(")).clicked() {
+                self.handle_button_press("(");
+            }
+            if ui.add(styled_button(")")).clicked() {
+                self.handle_button_press(")");
+            }
+            if ui.add(styled_button("π")).clicked() {
+                self.handle_button_press("pi");
+            }
+        });
 
         ui.horizontal(|ui| {
             if ui.add(styled_button("7")).clicked() {
@@ -123,6 +141,9 @@ impl CalculatorApp {
             if ui.add(styled_button("×")).clicked() {
                 self.handle_button_press("*");
             }
+            if ui.add(styled_button("√")).clicked() {
+                self.handle_button_press("sqrt(")
+            }
         });
 
         ui.horizontal(|ui| {
@@ -138,6 +159,9 @@ impl CalculatorApp {
             if ui.add(styled_button("-")).clicked() {
                 self.handle_button_press("-");
             }
+            if ui.add(styled_button("x²")).clicked() {
+                self.handle_button_press("^2");
+            }
         });
 
         ui.horizontal(|ui| {
@@ -147,8 +171,8 @@ impl CalculatorApp {
             if ui.add(styled_button(".")).clicked() {
                 self.handle_button_press(".");
             }
-            if ui.add(styled_button("%")).clicked() {
-                self.convert_to_perct();
+            if ui.add(styled_button("mod")).clicked() {
+                self.handle_button_press("%");
             }
             if ui.add(styled_button("+")).clicked() {
                 self.handle_button_press("+");
