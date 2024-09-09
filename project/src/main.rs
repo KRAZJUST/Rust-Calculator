@@ -2,7 +2,7 @@ mod app;
 mod calc;
 mod styles;
 
-use eframe::egui::{self, ViewportBuilder, Vec2};
+use eframe::egui::{ViewportBuilder, Vec2};
 use app::CalculatorApp;
 
 fn main() {

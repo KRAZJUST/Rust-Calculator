@@ -124,6 +124,7 @@ impl CalculatorApp {
         self.display.clear(); 
         self.calculate.clear();
         self.result = None;
+        self.previous_equation.clear();
     }
 
 }
