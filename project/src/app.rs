@@ -80,6 +80,9 @@ impl App for CalculatorApp {
         else if ctx.input(|i| i.key_pressed(egui::Key::CloseBracket)){
             self.handle_button_press(")");
         }
+        else if ctx.input(|i| i.key_pressed(egui::Key::E)) {
+            self.handle_button_press("e");
+        }
          
 
         CentralPanel::default().show(ctx, |ui| {
@@ -106,6 +109,9 @@ impl CalculatorApp {
             }
             if ui.add(styled_button(")")).clicked() {
                 self.handle_button_press(")");
+            }
+            if ui.add(styled_button("e")).clicked() {
+                self.handle_button_press("e");
             }
             if ui.add(styled_button("π")).clicked() {
                 self.handle_button_press("pi");

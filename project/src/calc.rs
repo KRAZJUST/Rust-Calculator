@@ -78,6 +78,7 @@ impl CalculatorApp {
         match eval_str(&self.calculate) {
             Ok(result) => {
                 self.previous_equation = self.display.clone();
+                self.previous_equation.push('=');
 
                 // Check if the result is a int and format it accordnigly
                 if result.fract() == 0.0 {

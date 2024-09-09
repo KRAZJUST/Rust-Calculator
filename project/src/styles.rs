@@ -67,7 +67,7 @@ pub fn draw_equation_background(ui: &mut egui::Ui, display: &str, previous_equat
 
     ui.painter().rect_filled(rect2, egui::Rounding::same(10.0), background_color2);
 
-    let mut font_size = 32.0;
+    let font_size: f32;
 
     if display.len() < 14 {
         font_size = 32.0;
